@@ -1,6 +1,6 @@
 import { ActionType } from "./action";
 
-export default function authUserReducer(authUser = {}, action = {}) {
+export default function authUserReducer(authUser = null, action = {}) {
     switch (action.type) {
         case ActionType.SET_AUTH_USER:
             return action.payload.authUser;
