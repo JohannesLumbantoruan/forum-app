@@ -25,6 +25,10 @@ h1 {
   text-align: center;
 }
 
+a {
+  color: var(--font-color)
+}
+
 .auth-page {
   border: solid var(--font-color);
   width: 70%;
@@ -38,18 +42,23 @@ h1 {
 }
 
 .auth-form {
-  * {
+  & > * {
     display: block;
     width: 100%;
     padding-block: 5px;
     padding-left: 5px;
 
-    &:not(button) {
+    &:not(button):not(p) {
       margin-bottom: 15px;
     }
 
     &:is(button) {
       margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    &:is(p) {
+      padding-left: 0;
     }
   }
 }

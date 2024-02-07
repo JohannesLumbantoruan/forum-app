@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 
 export default function RegisterInput({ register }) {
@@ -14,10 +15,11 @@ export default function RegisterInput({ register }) {
 
     return (
         <form onSubmit={onSubmitHandler} className="auth-form">
-            <input type="text" placeholder="Name" value={name} onChange={onNameChangeHandler} required="" />
-            <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required="" />
-            <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required="" />
+            <input type="text" placeholder="Name" value={name} onChange={onNameChangeHandler} required />
+            <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required />
+            <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required />
             <button>Register</button>
+            <p>Already have an account? Login <Link to="/">here</Link></p>
         </form>
     );
 }
