@@ -21,10 +21,6 @@ body {
   color: var(--font-color);
 }
 
-h1 {
-  text-align: center;
-}
-
 a {
   color: var(--font-color)
 }
@@ -38,6 +34,7 @@ a {
 
   h1 {
     margin-bottom: 20px;
+    text-align: center;
   }
 }
 
