@@ -89,7 +89,7 @@ export function asyncAddComment({ id, content }) {
     };
 }
 
-export function asyncUpvoteComment(commentId) {
+export function asyncUpvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -98,7 +98,7 @@ export function asyncUpvoteComment(commentId) {
         dispatch(upvoteCommentActionCreator({ commentId, userId }));
 
         try {
-            await api.upvoteComment(commentId);
+            await api.upvoteComment({ threadId, commentId });
         } catch (error) {
             alert(error.message);
 
@@ -111,7 +111,7 @@ export function asyncUpvoteComment(commentId) {
     };
 }
 
-export function asyncDownvoteComment(commentId) {
+export function asyncDownvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -120,7 +120,7 @@ export function asyncDownvoteComment(commentId) {
         dispatch(downvoteCommentActionCreator({ commentId, userId }));
 
         try {
-            await api.downvoteComment(commentId);
+            await api.downvoteComment({ threadId, commentId });
         } catch (error) {
             alert(error.message);
 
@@ -133,7 +133,7 @@ export function asyncDownvoteComment(commentId) {
     };
 }
 
-export function asyncNeutralizeVoteComment(commentId) {
+export function asyncNeutralizeVoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -143,7 +143,7 @@ export function asyncNeutralizeVoteComment(commentId) {
         dispatch(downvoteCommentActionCreator({ commentId, userId }));
 
         try {
-            await api.neutralizeComment(commentId);
+            await api.neutralizeComment({ threadId, commentId });
         } catch (error) {
             alert(error.message);
 

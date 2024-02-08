@@ -29,6 +29,7 @@ module.exports = {
     'comma-dangle': 0,
     'no-alert': 0,
     'max-len': 0,
-    'react/forbid-prop-types': 0
+    'react/forbid-prop-types': 0,
+    'no-underscore-dangle': 0
   },
 }

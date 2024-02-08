@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
-import { asyncAddComment, asyncReceiveThreadDetail } from '../states/threadDetail/action';
-import useInput from '../hooks/useInput';
+import { asyncReceiveThreadDetail } from '../states/threadDetail/action';
+import CommentInput from '../components/CommentInput';
+import CommentFooter from '../components/CommentFooter';
 
 export default function DetailPage() {
     const { id } = useParams();
@@ -14,17 +15,9 @@ export default function DetailPage() {
         authUser
     } = useSelector((states) => states);
 
-    const [content, onContentChangeHandler] = useInput('');
-
     useEffect(() => {
         dispatch(asyncReceiveThreadDetail(id));
     }, [dispatch, id]);
-
-    const onAddCommentHandler = (event) => {
-        event.preventDefault();
-
-        dispatch(asyncAddComment({ id, content }));
-    };
 
     if (!threadDetail) {
         return null;
@@ -32,21 +25,17 @@ export default function DetailPage() {
 
     return (
         <div className="thread-detail">
-            <h2 className='thread-title'>{threadDetail.title}</h2>
+            <h2 className="thread-title">{threadDetail.title}</h2>
             <div className="thread-body">{parse(threadDetail.body)}</div>
             <div className="thread-comments">
-                {authUser &&
-                    <form className="form-control" id="comment-form" onSubmit={onAddCommentHandler}>
-                        <input type="text" placeholder="Type your comment" value={content} onChange={onContentChangeHandler} required />
-                        <button>Comment</button>
-                    </form>
+                {
+                    authUser && (
+                    <CommentInput id={id} />
+                  )
                 }
                 {
                     threadDetail.comments.map((comment) => (
-                        <div className="comment-item" key={comment.id}>
-                            <h3>{comment.owner.name}</h3>
-                            <div className="comment-body">{parse(comment.content)}</div>
-                        </div>
+                        <CommentFooter comment={comment} key={comment.id} threadId={threadDetail.id} />
                     ))
                 }
             </div>

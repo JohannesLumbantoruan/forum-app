@@ -80,17 +80,17 @@ const api = (() => {
 
     async function getAllUsers() {
         const response = await fetch(`${BASE_URL}/users`);
-    
+
         const responseJson = await response.json();
-    
+
         const { status, message } = responseJson;
-    
+
         if (status !== 'success') {
           throw new Error(message);
         }
-    
+
         const { data: { users } } = responseJson;
-    
+
         return users;
     }
 
@@ -118,33 +118,33 @@ const api = (() => {
 
     async function getAllThreads() {
         const response = await fetch(`${BASE_URL}/threads`);
-    
+
         const responseJson = await response.json();
-    
+
         const { status, message } = responseJson;
-    
+
         if (status !== 'success') {
           throw new Error(message);
         }
-    
+
         const { data: { threads } } = responseJson;
-    
+
         return threads;
     }
 
     async function getThreadDetail(id) {
         const response = await fetch(`${BASE_URL}/threads/${id}`);
-    
+
         const responseJson = await response.json();
-    
+
         const { status, message } = responseJson;
-    
+
         if (status !== 'success') {
           throw new Error(message);
         }
-    
+
         const { data: { detailThread } } = responseJson;
-    
+
         return detailThread;
     }
 
@@ -224,8 +224,8 @@ const api = (() => {
         return vote;
     }
 
-    async function upvoteComment(id) {
-        const response = await _fetchWithToken(`${BASE_URL}/comments/${id}/up-vote`, {
+    async function upvoteComment({ threadId, commentId }) {
+        const response = await _fetchWithToken(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
             method: 'POST'
         });
 
@@ -242,8 +242,8 @@ const api = (() => {
         return vote;
     }
 
-    async function downvoteComment(id) {
-        const response = await _fetchWithToken(`${BASE_URL}/comments/${id}/down-vote`, {
+    async function downvoteComment({ threadId, commentId }) {
+        const response = await _fetchWithToken(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
             method: 'POST'
         });
 
@@ -260,8 +260,8 @@ const api = (() => {
         return vote;
     }
 
-    async function neutralizeComment(id) {
-        const response = await _fetchWithToken(`${BASE_URL}/comments/${id}/neutral-vote`, {
+    async function neutralizeComment({ threadId, commentId }) {
+        const response = await _fetchWithToken(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
             method: 'POST'
         });
 

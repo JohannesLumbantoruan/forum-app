@@ -108,7 +108,7 @@ export function asyncDownvoteThread(threadId) {
     };
 }
 
-export function asyncNeutralizeVote(threadId) {
+export function asyncNeutralizeVoteThread(threadId) {
     return async (dispatch, getState) => {
         try {
             await api.neutralizeThread(threadId);

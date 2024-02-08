@@ -5,7 +5,7 @@ import { IoChatboxEllipses } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import postedAt from '../utils/postedAt';
-import { asyncDownvoteThread, asyncNeutralizeVote, asyncUpvoteThread } from '../states/threads/action';
+import { asyncDownvoteThread, asyncNeutralizeVoteThread, asyncUpvoteThread } from '../states/threads/action';
 
 export default function ThreadFooter({ thread }) {
     const {
@@ -15,16 +15,16 @@ export default function ThreadFooter({ thread }) {
 
     const dispatch = useDispatch();
 
-    const onUpvoteHandler = () => {
+    const onUpvoteThreadHandler = () => {
         dispatch(asyncUpvoteThread(thread.id));
     };
 
-    const onDownvoteHandler = () => {
+    const onDownvoteThreadHandler = () => {
         dispatch(asyncDownvoteThread(thread.id));
     };
 
-    const onNeutralizeVoteHandler = () => {
-        dispatch(asyncNeutralizeVote(thread.id));
+    const onNeutralizeVoteThreadHandler = () => {
+        dispatch(asyncNeutralizeVoteThread(thread.id));
     };
 
     return (
@@ -32,16 +32,16 @@ export default function ThreadFooter({ thread }) {
             <div className="thread-data__upvote">
                 {
                     thread.upVotesBy.includes(authUser?.id)
-                    ? <AiFillLike onClick={onNeutralizeVoteHandler} />
-                    : <AiOutlineLike onClick={onUpvoteHandler} />
+                    ? <AiFillLike onClick={onNeutralizeVoteThreadHandler} />
+                    : <AiOutlineLike onClick={onUpvoteThreadHandler} />
                 }
                 <span className="thread-data__value">{thread.upVotesBy.length}</span>
             </div>
             <div className="thread-data__downvote">
                 {
                     thread.downVotesBy.includes(authUser?.id)
-                    ? <AiFillDislike onClick={onNeutralizeVoteHandler} />
-                    : <AiOutlineDislike onClick={onDownvoteHandler} />
+                    ? <AiFillDislike onClick={onNeutralizeVoteThreadHandler} />
+                    : <AiOutlineDislike onClick={onDownvoteThreadHandler} />
                 }
                 <span className="thread-data__value">{thread.downVotesBy.length}</span>
             </div>

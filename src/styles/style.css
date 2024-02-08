@@ -35,6 +35,15 @@ a {
   color: var(--font-color)
 }
 
+textarea {
+  resize: none;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 1em;
+}
+
 nav {
   display: flex;
   border: solid var(--font-color);
@@ -155,5 +164,40 @@ nav {
         gap: 3px;
       }
     }
+  }
+}
+
+.thread-detail {
+  .comment-item {
+    border: solid var(--font-color);
+    padding: 5px 10px;
+    margin-bottom: 10px;
+
+    .comment-body {
+      margin-top: 10px;
+    }
+  }
+
+  .thread-comments {
+    margin-block: 20px;
+
+    #comment-form {
+      margin-bottom: 20px;
+    }
+
+    .comment-data {
+      display: flex;
+      gap: 10px;
+
+      & > * {
+        display: flex;
+        gap: 3px;
+      }
+    }
+  }
+
+  h3 {
+    display: flex;
+    gap: 5px;
   }
 }
