@@ -19,7 +19,7 @@ export default function DetailPage() {
 
     const onAddCommentHandler = (event) => {
         event.preventDefault();
-        
+
         dispatch(asyncAddComment({ id, content }));
     };
 
@@ -32,7 +32,7 @@ export default function DetailPage() {
             <h2 className='thread-title'>{threadDetail.title}</h2>
             <div className="thread-body">{parse(threadDetail.body)}</div>
             <div className="thread-comments">
-                <form className="form-control" id="comment-form">
+                <form className="form-control" id="comment-form" onSubmit={onAddCommentHandler}>
                     <input type="text" placeholder="Type your comment" value={content} onChange={onContentChangeHandler} required="" />
                     <button>Comment</button>
                 </form>
