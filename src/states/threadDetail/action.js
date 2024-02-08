@@ -77,10 +77,10 @@ export function asyncReceiveThreadDetail(id) {
     };
 }
 
-export function asyncAddComment({ id, content}) {
+export function asyncAddComment({ id, content }) {
     return async (dispatch) => {
         try {
-            const comment = await api.createThreadComment({ id, content});
+            const comment = await api.createThreadComment({ id, content });
 
             dispatch(addCommentActionCreator(comment));
         } catch (error) {

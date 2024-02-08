@@ -22,17 +22,62 @@ body {
 }
 
 main {
-  width: 90%;
   margin-inline: auto;
+  padding-block: 20px;
+  max-width: 60%;
 
   h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 }
 
 a {
   color: var(--font-color)
+}
+
+nav {
+  display: flex;
+  border: solid var(--font-color);
+  justify-content: space-between;
+  padding: 10px 20px;
+  width: 70%;
+  margin-inline: auto;
+
+  h1 {
+    font-size: 1.75em;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+
+    li {
+      list-style-type: none;
+      margin-left: 15px;
+      font-size: 1.25em;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      svg {
+        font-size: 1.5em;
+        height: 1.25em;
+        width: 1.25em;
+        max-width: 25px;
+        max-height: 25px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    color: var(--font-color);
+  }
 }
 
 .auth-page {
@@ -72,7 +117,7 @@ a {
 
 .thread-list {
   .threads-item {
-    border: solid #fff;
+    border: solid var(--font-color);
     padding: 5px 10px;
     margin-bottom: 20px;
 

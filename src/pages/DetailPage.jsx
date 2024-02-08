@@ -9,7 +9,10 @@ export default function DetailPage() {
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    const threadDetail = useSelector((states) => states.threadDetail);
+    const {
+        threadDetail,
+        authUser
+    } = useSelector((states) => states);
 
     const [content, onContentChangeHandler] = useInput('');
 
@@ -32,10 +35,12 @@ export default function DetailPage() {
             <h2 className='thread-title'>{threadDetail.title}</h2>
             <div className="thread-body">{parse(threadDetail.body)}</div>
             <div className="thread-comments">
-                <form className="form-control" id="comment-form" onSubmit={onAddCommentHandler}>
-                    <input type="text" placeholder="Type your comment" value={content} onChange={onContentChangeHandler} required="" />
-                    <button>Comment</button>
-                </form>
+                {authUser &&
+                    <form className="form-control" id="comment-form" onSubmit={onAddCommentHandler}>
+                        <input type="text" placeholder="Type your comment" value={content} onChange={onContentChangeHandler} required />
+                        <button>Comment</button>
+                    </form>
+                }
                 {
                     threadDetail.comments.map((comment) => (
                         <div className="comment-item" key={comment.id}>

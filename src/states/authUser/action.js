@@ -23,7 +23,7 @@ export function unsetAuthUserActionCreator() {
 export function asyncSetAuthUser({ email, password }) {
     return async (dispatch) => {
         try {
-            const token = await api.login({ email, password});
+            const token = await api.login({ email, password });
 
             api.putAccessToken(token);
 
@@ -36,10 +36,10 @@ export function asyncSetAuthUser({ email, password }) {
     };
 }
 
-export function asynUnsetAuthUser() {
+export function asyncUnsetAuthUser() {
     return (dispatch) => {
         dispatch(unsetAuthUserActionCreator());
 
         api.putAccessToken('');
-    }
+    };
 }

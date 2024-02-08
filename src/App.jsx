@@ -1,23 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import { useEffect } from 'react';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import DetailPage from './pages/DetailPage';
+import Navigation from './components/Navigation';
 
 function App() {
   const {
     authUser,
-    isPreload
+    isPreload,
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
-  }, [dispatch])
+  }, [dispatch]);
 
   if (isPreload) {
     return null;
@@ -25,7 +26,10 @@ function App() {
 
   if (authUser === null) {
     return (
-      <>
+      <div className="app-container">
+        <header>
+          <Navigation />
+        </header>
         <main>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
@@ -34,25 +38,23 @@ function App() {
             <Route path="/threads/:id" element={<DetailPage />} />
           </Routes>
         </main>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <div className="app-container">
-        <header>
-          <h1>Forum App</h1>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/threads/:id" element={<DetailPage />} />
-          </Routes>
-        </main>
-      </div>
-    </>
+    <div className="app-container">
+      <header>
+        <Navigation />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/threads/:id" element={<DetailPage />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
-export default App
+export default App;
