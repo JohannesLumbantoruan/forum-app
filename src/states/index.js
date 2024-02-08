@@ -5,6 +5,7 @@ import isPreloadReducer from './isPreload/reducer';
 import threadDetailReducer from './threadDetail/reducer';
 import usersReducer from './users/reducer';
 import leaderboardsReducer from './leaderboards/reducer';
+import authCheck from './middlewares/authCheck';
 
 const store = configureStore({
     reducer: {
@@ -14,7 +15,8 @@ const store = configureStore({
         threadDetail: threadDetailReducer,
         users: usersReducer,
         leaderboards: leaderboardsReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) => [authCheck, ...getDefaultMiddleware()]
 });
 
 export default store;

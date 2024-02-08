@@ -180,7 +180,10 @@ const api = (() => {
         const { status, message } = responseJson;
 
         if (status !== 'success') {
-            throw new Error(message);
+            const error = new Error(message);
+            error.code = response.status;
+
+            throw error;
         }
 
         const { data: { vote } } = responseJson;

@@ -82,12 +82,12 @@ export function asyncAddThread({ title, body, category }) {
 
 export function asyncUpvoteThread(threadId) {
     return async (dispatch, getState) => {
+        const { id: userId = null } = getState().authUser ?? {};
+
         try {
-            await api.upvoteThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(upvoteThreadActionCreator({ userId, threadId }));
+
+            await api.upvoteThread(threadId);
         } catch (error) {
             alert(error.message);
         }
@@ -96,12 +96,12 @@ export function asyncUpvoteThread(threadId) {
 
 export function asyncDownvoteThread(threadId) {
     return async (dispatch, getState) => {
+        const { id: userId } = getState().authUser ?? {};
+
         try {
-            await api.downvoteThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(downvoteThreadActionCreator({ userId, threadId }));
+
+            await api.downvoteThread(threadId);
         } catch (error) {
             alert(error.message);
         }
