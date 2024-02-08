@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncDownvoteComment, asyncNeutralizeVoteComment, asyncUpvoteComment } from '../states/threadDetail/action';
 
-export default function CommentFooter({ comment, threadId }) {
+export default function CommentItem({ comment, threadId }) {
     const commentId = comment.id;
     const authUser = useSelector((states) => states.authUser);
 
@@ -50,7 +50,7 @@ export default function CommentFooter({ comment, threadId }) {
     );
 }
 
-CommentFooter.propTypes = {
+CommentItem.propTypes = {
     comment: PropTypes.object.isRequired,
     threadId: PropTypes.string.isRequired
 };

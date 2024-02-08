@@ -6,7 +6,10 @@ export const ActionType = {
     ADD_COMMENT: 'ADD_COMMENT',
     UPVOTE_COMMENT: 'UPVOTE_COMMENT',
     DOWNVOTE_COMMENT: 'DOWNVOTE_COMMENT',
-    NEUTRALIZE_VOTE_COMMENT: 'NEUTRALIZE_VOTE_COMMENT'
+    NEUTRALIZE_VOTE_COMMENT: 'NEUTRALIZE_VOTE_COMMENT',
+    UPVOTE_THREAD: 'UPVOTE_THREAD',
+    DOWNVOTE_THREAD: 'DOWNVOTE_THREAD',
+    NEUTRALIZE_VOTE_THREAD: 'NEUTRALIZE_VOTE_THREAD'
 };
 
 export function receiveThreadDetailActionCreator(threadDetail) {
@@ -58,6 +61,33 @@ export function neutralizeVoteCommentActionCreator({ commentId, userId }) {
         type: ActionType.NEUTRALIZE_VOTE_COMMENT,
         payload: {
             commentId,
+            userId
+        }
+    };
+}
+
+export function upvoteThreadActionCreator({ userId }) {
+    return {
+        type: ActionType.UPVOTE_THREAD,
+        payload: {
+            userId
+        }
+    };
+}
+
+export function downvoteThreadActionCreator({ userId }) {
+    return {
+        type: ActionType.DOWNVOTE_THREAD,
+        payload: {
+            userId
+        }
+    };
+}
+
+export function neutralizeVoteActionCreator({ userId }) {
+    return {
+        type: ActionType.NEUTRALIZE_VOTE_THREAD,
+        payload: {
             userId
         }
     };
@@ -154,6 +184,54 @@ export function asyncNeutralizeVoteComment({ threadId, commentId }) {
             if (isDownvote) {
                 dispatch(downvoteCommentActionCreator({ commentId, userId }));
             }
+        }
+    };
+}
+
+export function asyncUpvoteThread() {
+    return async (dispatch, getState) => {
+        const { threadDetail: { id: threadId } } = getState();
+
+        try {
+            await api.upvoteThread(threadId);
+
+            const { authUser: { id: userId } } = getState();
+
+            dispatch(upvoteThreadActionCreator({ userId }));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
+export function asyncDownvoteThread() {
+    return async (dispatch, getState) => {
+        const { threadDetail: { id: threadId } } = getState();
+
+        try {
+            await api.downvoteThread(threadId);
+
+            const { authUser: { id: userId } } = getState();
+
+            dispatch(downvoteThreadActionCreator({ userId }));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
+export function asyncNeutralizeVoteThread() {
+    return async (dispatch, getState) => {
+        const { threadDetail: { id: threadId } } = getState();
+
+        try {
+            await api.neutralizeThread(threadId);
+
+            const { authUser: { id: userId } } = getState();
+
+            dispatch(neutralizeVoteActionCreator({ userId }));
+        } catch (error) {
+            alert(error.message);
         }
     };
 }

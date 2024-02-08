@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { asyncReceiveThreadDetail } from '../states/threadDetail/action';
 import CommentInput from '../components/CommentInput';
-import CommentFooter from '../components/CommentFooter';
+import CommentItem from '../components/CommentItem';
+import ThreadDetailFooter from '../components/ThreadDetailFooter';
 
 export default function DetailPage() {
     const { id } = useParams();
@@ -27,6 +28,7 @@ export default function DetailPage() {
         <div className="thread-detail">
             <h2 className="thread-title">{threadDetail.title}</h2>
             <div className="thread-body">{parse(threadDetail.body)}</div>
+            <ThreadDetailFooter thread={threadDetail} />
             <div className="thread-comments">
                 {
                     authUser && (
@@ -35,7 +37,7 @@ export default function DetailPage() {
                 }
                 {
                     threadDetail.comments.map((comment) => (
-                        <CommentFooter comment={comment} key={comment.id} threadId={threadDetail.id} />
+                        <CommentItem comment={comment} key={comment.id} threadId={threadDetail.id} />
                     ))
                 }
             </div>

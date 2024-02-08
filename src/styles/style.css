@@ -153,17 +153,6 @@ nav {
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
     }
-
-    .thread-data {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-
-      & > * {
-        display: flex;
-        gap: 3px;
-      }
-    }
   }
 }
 
@@ -188,6 +177,7 @@ nav {
     .comment-data {
       display: flex;
       gap: 10px;
+      margin-top: 5px;
 
       & > * {
         display: flex;
@@ -199,5 +189,16 @@ nav {
   h3 {
     display: flex;
     gap: 5px;
+  }
+}
+
+.thread-data {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+
+  & > * {
+    display: flex;
+    gap: 3px;
   }
 }
