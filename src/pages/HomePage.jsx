@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { asyncreceiveThreads } from '../states/threads/action';
 
 export default function HomePage() {
@@ -14,13 +16,18 @@ export default function HomePage() {
     return (
         <>
             <h2>Home Page</h2>
-            <ul>
-            {
-                threads.map((thread) => (
-                    <li key={thread.id}>{thread.body}</li>
-                ))
-            }
-            </ul>
+            <div className="thread-list">
+                {
+                    threads.map((thread) => (
+                        <div className="threads-item" key={thread.id}>
+                            <h3 className="thread-title">
+                                <Link to={`/threads/${thread.id}`}>{thread.title}</Link>
+                            </h3>
+                            <p className="thread-body">{parse(thread.body)}</p>
+                        </div>
+                    ))
+                }
+            </div>
         </>
     );
 }
