@@ -13,6 +13,18 @@ export function receiveUsersActionCreator(users) {
     };
 }
 
+export function asyncReceiveUsers() {
+    return async (dispatch) => {
+        try {
+            const users = await api.getAllUsers();
+
+            dispatch(receiveUsersActionCreator(users));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
 export function asyncRegisterUser({ name, email, password }) {
     return async () => {
         try {

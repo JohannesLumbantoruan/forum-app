@@ -28,6 +28,7 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': 0,
     'comma-dangle': 0,
     'no-alert': 0,
-    'max-len': 125
+    'max-len': 0,
+    'react/forbid-prop-types': 0
   },
 }

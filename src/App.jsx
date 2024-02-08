@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import DetailPage from './pages/DetailPage';
 import Navigation from './components/Navigation';
+import AddPage from './pages/AddPage';
 
 function App() {
   const {
@@ -51,6 +52,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/threads/:id" element={<DetailPage />} />
+          <Route path="/threads/add" element={<AddPage />} />
         </Routes>
       </main>
     </div>

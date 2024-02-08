@@ -14,7 +14,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className='auth-page'>
+        <div className='form-page'>
             <h1>Register Page</h1>
             <RegisterInput register={onRegisterHandler} />
         </div>

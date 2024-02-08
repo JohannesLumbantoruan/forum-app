@@ -10,7 +10,7 @@ export default function threadDetailReducer(threadDetail = null, action = {}) {
             return {
                 ...threadDetail,
                 comments: [action.payload.comment, ...threadDetail.comments]
-            }
+            };
         case ActionType.UPVOTE_COMMENT:
             return {
                 ...threadDetail,
@@ -25,7 +25,7 @@ export default function threadDetailReducer(threadDetail = null, action = {}) {
 
                     return comment;
                 })
-            }
+            };
         case ActionType.DOWNVOTE_COMMENT:
             return {
                 ...threadDetail,
@@ -40,7 +40,7 @@ export default function threadDetailReducer(threadDetail = null, action = {}) {
 
                     return comment;
                 })
-            }
+            };
         case ActionType.NEUTRALIZE_VOTE_COMMENT:
             return {
                 ...threadDetail,
@@ -55,7 +55,7 @@ export default function threadDetailReducer(threadDetail = null, action = {}) {
 
                     return comment;
                 })
-            }
+            };
         default:
             return threadDetail;
     }

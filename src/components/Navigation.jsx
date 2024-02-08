@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiLogOut, FiLogIn } from 'react-icons/fi';
 import { BiConversation } from 'react-icons/bi';
 import { MdOutlineLeaderboard } from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa';
 import { asyncUnsetAuthUser } from '../states/authUser/action';
 
 export default function Navigation() {
@@ -22,7 +23,10 @@ export default function Navigation() {
                 <li><Link to="/leaderboards"><MdOutlineLeaderboard /></Link></li>
                 {
                     authUser
-                    ? <li>{authUser.name} <button onClick={onLogoutHandler}><FiLogOut /></button></li>
+                    ? <>
+                        <li><Link to="/threads/add"><FaPlus /></Link></li>
+                        <li>{authUser.name} <button onClick={onLogoutHandler}><FiLogOut /></button></li>
+                      </>
                     : <li><Link to="/login"><FiLogIn /></Link></li>
                 }
             </ul>

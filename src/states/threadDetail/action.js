@@ -107,7 +107,6 @@ export function asyncUpvoteComment(commentId) {
             if (isDownvote) {
                 dispatch(downvoteCommentActionCreator({ commentId, userId }));
             }
-
         }
     };
 }
@@ -126,11 +125,10 @@ export function asyncDownvoteComment(commentId) {
             alert(error.message);
 
             dispatch(neutralizeVoteCommentActionCreator({ commentId, userId }));
-            
+
             if (isUpvote) {
                 dispatch(upvoteCommentActionCreator({ commentId, userId }));
             }
-
         }
     };
 }

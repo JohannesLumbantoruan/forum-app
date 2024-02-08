@@ -19,7 +19,7 @@ export default function RegisterInput({ register }) {
             <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required />
             <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required />
             <button>Register</button>
-            <p>Already have an account? Login <Link to="/">here</Link></p>
+            <p>Already have an account? Login <Link to="/login">here</Link></p>
         </form>
     );
 }

@@ -23,7 +23,7 @@ export function addThreadActionCreator(thread) {
         payload: {
             thread
         }
-    }
+    };
 }
 
 export function upvoteThreadActionCreator({ userId, threadId }) {
@@ -33,7 +33,7 @@ export function upvoteThreadActionCreator({ userId, threadId }) {
             userId,
             threadId
         }
-    }
+    };
 }
 
 export function downvoteThreadActionCreator({ userId, threadId }) {
@@ -72,7 +72,7 @@ export function asyncAddThread({ title, body, category }) {
     return async (dispatch) => {
         try {
             const thread = await api.createThread({ title, body, category });
-            
+
             dispatch(addThreadActionCreator(thread));
         } catch (error) {
             alert(error.message);
@@ -89,7 +89,7 @@ export function asyncUpvoteThread(threadId) {
 
             dispatch(upvoteThreadActionCreator({ userId, threadId }));
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
     };
 }
@@ -103,7 +103,7 @@ export function asyncDownvoteThread(threadId) {
 
             dispatch(downvoteThreadActionCreator({ userId, threadId }));
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
     };
 }
@@ -117,7 +117,7 @@ export function asyncNeutralizeVote(threadId) {
 
             dispatch(neutralizeVoteActionCreator({ userId, threadId }));
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
     };
 }

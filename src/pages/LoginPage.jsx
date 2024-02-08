@@ -13,7 +13,7 @@ export default function LoginPage() {
         navigate('/');
     }
     return (
-        <div className="auth-page">
+        <div className="form-page">
             <h1>Login Page</h1>
             <LoginInput login={onLoginHandler} />
         </div>
