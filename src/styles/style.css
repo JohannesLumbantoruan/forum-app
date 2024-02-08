@@ -9,11 +9,8 @@
 :root {
   --font-color: #eee;
   --background-color: #333;
-}
 
-[data-theme="light"] {
-  --font-color: #333;
-  --background-color: #eee;
+  font-family: Roboto, Tahoma, sans-serif;
 }
 
 body {
@@ -200,5 +197,42 @@ nav {
   & > * {
     display: flex;
     gap: 3px;
+
+    &:last-child {
+      * {
+        display: flex;
+        gap: 5px;
+      }
+    }
+  }
+
+  img {
+    height: 1rem;
+  }
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.leaderboards-list {
+  li {
+    list-style-type: none;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    * {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  img {
+    width: 50px;
+    border-radius: 50%;
   }
 }

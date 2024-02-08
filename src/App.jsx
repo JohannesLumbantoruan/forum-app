@@ -8,6 +8,7 @@ import { asyncPreloadProcess } from './states/isPreload/action';
 import DetailPage from './pages/DetailPage';
 import Navigation from './components/Navigation';
 import AddPage from './pages/AddPage';
+import LeaderboardsPage from './pages/LeaderboardsPage';
 
 function App() {
   const {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/threads/:id" element={<DetailPage />} />
+            <Route path="/leaderboards" element={<LeaderboardsPage />} />
           </Routes>
         </main>
       </div>
@@ -53,6 +55,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/threads/:id" element={<DetailPage />} />
           <Route path="/threads/add" element={<AddPage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
         </Routes>
       </main>
     </div>

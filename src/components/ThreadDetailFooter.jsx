@@ -8,10 +8,7 @@ import postedAt from '../utils/postedAt';
 import { asyncDownvoteThread, asyncNeutralizeVoteThread, asyncUpvoteThread } from '../states/threadDetail/action';
 
 export default function ThreadDetailFooter({ thread }) {
-    const {
-        authUser,
-        users
-    } = useSelector((states) => states);
+    const authUser = useSelector((states) => states.authUser);
 
     const dispatch = useDispatch();
 
@@ -47,13 +44,13 @@ export default function ThreadDetailFooter({ thread }) {
             </div>
             <div className="thread-data__comments">
                 <IoChatboxEllipses />
-                <span className="thread-data__value">{thread.totalComments}</span>
+                <span className="thread-data__value">{thread.comments.length}</span>
             </div>
             <div className="thread-data__time-created">
                 <p>{postedAt(thread.createdAt)}</p>
             </div>
             <div className="thread-data__owner">
-                <p>Posted by {users.find((user) => user.id === thread.ownerId)?.name}</p>
+                <p><span>Posted by</span> <img className="avatar" src={thread.owner.avatar} alt={thread.owner.name} /> <span>{thread.owner.name}</span></p>
             </div>
         </div>
     );

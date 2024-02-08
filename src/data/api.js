@@ -288,9 +288,9 @@ const api = (() => {
             throw new Error(message);
         }
 
-        const { data: { leaderboars } } = responseJson;
+        const { data: { leaderboards } } = responseJson;
 
-        return leaderboars;
+        return leaderboards;
     }
 
     return {

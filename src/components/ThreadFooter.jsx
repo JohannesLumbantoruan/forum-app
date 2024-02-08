@@ -27,6 +27,8 @@ export default function ThreadFooter({ thread }) {
         dispatch(asyncNeutralizeVoteThread(thread.id));
     };
 
+    const owner = users.find((user) => user.id === thread.ownerId);
+
     return (
         <div className="thread-data">
             <div className="thread-data__upvote">
@@ -53,7 +55,7 @@ export default function ThreadFooter({ thread }) {
                 <p>{postedAt(thread.createdAt)}</p>
             </div>
             <div className="thread-data__owner">
-                <p>Posted by {users.find((user) => user.id === thread.ownerId)?.name}</p>
+                <p><span>Posted by</span><img className="avatar" src={owner.avatar} alt={owner.name} /><span>{owner.name}</span></p>
             </div>
         </div>
     );
