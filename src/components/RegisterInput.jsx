@@ -14,7 +14,7 @@ export default function RegisterInput({ register }) {
     };
 
     return (
-        <form onSubmit={onSubmitHandler} className="auth-form">
+        <form onSubmit={onSubmitHandler} className="form-control" id="register-form">
             <input type="text" placeholder="Name" value={name} onChange={onNameChangeHandler} required />
             <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required />
             <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required />

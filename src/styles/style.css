@@ -48,7 +48,7 @@ a {
   }
 }
 
-.auth-form {
+.form-control {
   & > * {
     display: block;
     width: 100%;
@@ -78,6 +78,10 @@ a {
 
     .thread-title {
       margin-bottom: 10px;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     .thread-body {

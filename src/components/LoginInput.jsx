@@ -13,9 +13,9 @@ export default function LoginInput({ login }) {
     }
     
     return (
-        <form className="auth-form" onSubmit={onSubmitHandler}>
-            <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required="" />
-            <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required="" />
+        <form className="form-control" onSubmit={onSubmitHandler} id="login-form">
+            <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required />
+            <input type="password" placeholder="Password" value={password} onChange={onPasswordChangeHandler} required />
             <button>Login</button>
             <p>Do not have an account yet? Register <Link to="/register">here</Link></p>
         </form>
