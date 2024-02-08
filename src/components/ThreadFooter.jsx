@@ -55,7 +55,7 @@ export default function ThreadFooter({ thread }) {
                 <p>{postedAt(thread.createdAt)}</p>
             </div>
             <div className="thread-data__owner">
-                <p><span>Posted by</span><img className="avatar" src={owner.avatar} alt={owner.name} /><span>{owner.name}</span></p>
+                <p><span>Posted by</span><img className="avatar" src={owner?.avatar} alt={owner?.name} /><span>{owner?.name}</span></p>
             </div>
         </div>
     );

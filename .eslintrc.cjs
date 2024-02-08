@@ -30,6 +30,7 @@ module.exports = {
     'no-alert': 0,
     'max-len': 0,
     'react/forbid-prop-types': 0,
-    'no-underscore-dangle': 0
+    'no-underscore-dangle': 0,
+    'consistent-return': 0
   },
 }

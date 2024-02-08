@@ -56,19 +56,19 @@ export default function threadDetailReducer(threadDetail = null, action = {}) {
                     return comment;
                 })
             };
-        case ActionType.UPVOTE_THREAD:
+        case ActionType.UPVOTE_DETAIL_THREAD:
             return {
                 ...threadDetail,
                 upVotesBy: threadDetail.upVotesBy.concat(action.payload.userId),
                 downVotesBy: threadDetail.downVotesBy.filter((userId) => userId !== action.payload.userId)
             };
-        case ActionType.DOWNVOTE_THREAD:
+        case ActionType.DOWNVOTE_DETAIL_THREAD:
             return {
                 ...threadDetail,
                 downVotesBy: threadDetail.downVotesBy.concat(action.payload.userId),
                 upVotesBy: threadDetail.upVotesBy.filter((userId) => userId !== action.payload.userId)
             };
-        case ActionType.NEUTRALIZE_VOTE_THREAD:
+        case ActionType.NEUTRALIZE_VOTE_DETAIL_THREAD:
             return {
                 ...threadDetail,
                 upVotesBy: threadDetail.upVotesBy.filter((userId) => userId !== action.payload.userId),
