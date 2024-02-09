@@ -9,8 +9,9 @@
 :root {
   --font-color: #fafafa;
   --background-color: #18181b;
+  --font-family: Roboto, Tahoma, sans-serif;
 
-  font-family: Roboto, Tahoma, sans-serif;
+  font-family: var(--font-family);
 }
 
 body {
@@ -34,6 +35,7 @@ a {
 
 textarea {
   resize: none;
+  font-family: var(--font-family);
 }
 
 .avatar {

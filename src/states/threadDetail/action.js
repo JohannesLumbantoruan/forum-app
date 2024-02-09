@@ -208,16 +208,22 @@ export function asyncUpvoteThread() {
             return;
         }
 
-        const { threadDetail: { id: threadId } } = getState();
+        const { authUser: { id: userId }, threadDetail } = getState();
+
+        const isDownvote = threadDetail.downVotesBy.includes(userId);
 
         try {
-            await api.upvoteThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(upvoteThreadActionCreator({ userId }));
+
+            await api.upvoteThread(threadDetail.id);
         } catch (error) {
             alert(error.message);
+
+            dispatch(neutralizeVoteActionCreator({ userId }));
+
+            if (isDownvote) {
+                dispatch(downvoteThreadActionCreator({ userId }));
+            }
         }
     };
 }
@@ -230,32 +236,47 @@ export function asyncDownvoteThread() {
             return;
         }
 
-        const { threadDetail: { id: threadId } } = getState();
+        const { authUser: { id: userId }, threadDetail } = getState();
+
+        const isUpvote = threadDetail.upVotesBy.includes(userId);
 
         try {
-            await api.downvoteThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(downvoteThreadActionCreator({ userId }));
+
+            await api.downvoteThread(threadDetail.id);
         } catch (error) {
             alert(error.message);
+
+            dispatch(neutralizeVoteActionCreator({ userId }));
+
+            if (isUpvote) {
+                dispatch(upvoteThreadActionCreator({ userId }));
+            }
         }
     };
 }
 
 export function asyncNeutralizeVoteThread() {
     return async (dispatch, getState) => {
-        const { threadDetail: { id: threadId } } = getState();
+        const { authUser: { id: userId }, threadDetail } = getState();
+
+        const isUpvote = threadDetail.upVotesBy.includes(userId);
+        const isDownvote = threadDetail.downVotesBy.includes(userId);
 
         try {
-            await api.neutralizeThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(neutralizeVoteActionCreator({ userId }));
+
+            await api.neutralizeThread(threadDetail.id);
         } catch (error) {
             alert(error.message);
+
+            if (isUpvote) {
+                dispatch(upvoteCommentActionCreator({ userId }));
+            }
+
+            if (isDownvote) {
+                dispatch(downvoteThreadActionCreator({ userId }));
+            }
         }
     };
 }
