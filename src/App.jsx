@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import LoadingBar from 'react-redux-loading-bar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -28,37 +29,43 @@ function App() {
 
   if (authUser === null) {
     return (
+      <>
+        <LoadingBar />
+        <div className="app-container">
+          <header>
+            <Navigation />
+          </header>
+          <main>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/threads/:id" element={<DetailPage />} />
+              <Route path="/leaderboards" element={<LeaderboardsPage />} />
+            </Routes>
+          </main>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <LoadingBar />
       <div className="app-container">
         <header>
           <Navigation />
         </header>
         <main>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/threads/:id" element={<DetailPage />} />
+            <Route path="/threads/add" element={<AddPage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
           </Routes>
         </main>
       </div>
-    );
-  }
-
-  return (
-    <div className="app-container">
-      <header>
-        <Navigation />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/threads/:id" element={<DetailPage />} />
-          <Route path="/threads/add" element={<AddPage />} />
-          <Route path="/leaderboards" element={<LeaderboardsPage />} />
-        </Routes>
-      </main>
-    </div>
+    </>
   );
 }
 

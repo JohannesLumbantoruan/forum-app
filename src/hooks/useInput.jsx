@@ -5,7 +5,7 @@ export default function useInput(value) {
 
     const onStateChange = (event) => {
         setState(event.target.value);
-    }
+    };
 
     return [state, onStateChange];
 }

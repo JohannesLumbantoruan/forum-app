@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import RegisterInput from '../components/RegisterInput';
 import { useNavigate } from 'react-router-dom';
+import RegisterInput from '../components/RegisterInput';
 import { asyncRegisterUser } from '../states/users/action';
 
 export default function RegisterPage() {
@@ -14,9 +14,9 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className='form-page'>
+        <div className="form-page">
             <h1>Register Page</h1>
             <RegisterInput register={onRegisterHandler} />
         </div>
-    )
+    );
 }

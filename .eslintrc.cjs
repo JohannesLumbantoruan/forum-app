@@ -31,6 +31,7 @@ module.exports = {
     'max-len': 0,
     'react/forbid-prop-types': 0,
     'no-underscore-dangle': 0,
-    'consistent-return': 0
+    'consistent-return': 0,
+    'import/no-extraneous-dependencies': 0
   },
 }

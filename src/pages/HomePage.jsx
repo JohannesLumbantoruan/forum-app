@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncreceiveThreads } from '../states/threads/action';
+import { asyncReceiveThreads } from '../states/threads/action';
 import { asyncReceiveUsers } from '../states/users/action';
 import ThreadItem from '../components/ThreadItem';
 
@@ -10,7 +10,7 @@ export default function HomePage() {
     const threads = useSelector((states) => states.threads);
 
     useEffect(() => {
-        dispatch(asyncreceiveThreads());
+        dispatch(asyncReceiveThreads());
         dispatch(asyncReceiveUsers());
     }, [dispatch]);
 

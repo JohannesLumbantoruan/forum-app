@@ -13,10 +13,10 @@ export default function ThreadInput({ addThread }) {
     };
 
     return (
-        <form className='form-control' onSubmit={onSubmitHandler} id="add-thread-form">
+        <form className="form-control" onSubmit={onSubmitHandler} id="add-thread-form">
             <input type="text" placeholder="Title" value={title} onChange={onTitleChangeHandler} required />
             <input type="text" placeholder="Category" value={category} onChange={onCategoryChangeHandler} required />
-            <textarea rows="5" placeholder="Body" value={body} onChange={onBodyChangeHandler} required></textarea>
+            <textarea rows="5" placeholder="Body" value={body} onChange={onBodyChangeHandler} required />
             <button>Add Thread</button>
         </form>
     );

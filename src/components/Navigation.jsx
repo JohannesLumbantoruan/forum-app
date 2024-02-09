@@ -23,10 +23,12 @@ export default function Navigation() {
                 <li><Link to="/leaderboards"><MdOutlineLeaderboard /></Link></li>
                 {
                     authUser
-                    ? <>
+                    ? (
+<>
                         <li><Link to="/threads/add"><FaPlus /></Link></li>
                         <li>{authUser.name} <button onClick={onLogoutHandler}><FiLogOut /></button></li>
-                      </>
+</>
+)
                     : <li><Link to="/login"><FiLogIn /></Link></li>
                 }
             </ul>

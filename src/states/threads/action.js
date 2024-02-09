@@ -1,3 +1,4 @@
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../data/api';
 
 export const ActionType = {
@@ -56,8 +57,10 @@ export function neutralizeVoteActionCreator({ userId, threadId }) {
     };
 }
 
-export function asyncreceiveThreads() {
+export function asyncReceiveThreads() {
     return async (dispatch) => {
+        dispatch(showLoading());
+
         try {
             const threads = await api.getAllThreads();
 
@@ -65,11 +68,15 @@ export function asyncreceiveThreads() {
         } catch (error) {
             alert(error.message);
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncAddThread({ title, body, category }) {
     return async (dispatch) => {
+        dispatch(showLoading());
+
         try {
             const thread = await api.createThread({ title, body, category });
 
@@ -77,11 +84,15 @@ export function asyncAddThread({ title, body, category }) {
         } catch (error) {
             alert(error.message);
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncUpvoteThread(threadId) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -107,11 +118,15 @@ export function asyncUpvoteThread(threadId) {
                 dispatch(downvoteThreadActionCreator({ userId, threadId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncDownvoteThread(threadId) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -137,11 +152,15 @@ export function asyncDownvoteThread(threadId) {
                 dispatch(upvoteThreadActionCreator({ userId, threadId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncNeutralizeVoteThread(threadId) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         const { authUser: { id: userId } } = getState();
 
         const votedThread = getState().threads.find((thread) => thread.id === threadId);
@@ -164,5 +183,7 @@ export function asyncNeutralizeVoteThread(threadId) {
                 dispatch(downvoteThreadActionCreator({ userId, threadId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }

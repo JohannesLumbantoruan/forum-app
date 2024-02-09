@@ -1,3 +1,4 @@
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../data/api';
 
 export const ActionType = {
@@ -95,6 +96,8 @@ export function neutralizeVoteActionCreator({ userId }) {
 
 export function asyncReceiveThreadDetail(id) {
     return async (dispatch) => {
+        dispatch(showLoading());
+
         dispatch(clearThreadDetailActionCreator());
 
         try {
@@ -104,11 +107,15 @@ export function asyncReceiveThreadDetail(id) {
         } catch (error) {
             alert(error.message);
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncAddComment({ id, content }) {
     return async (dispatch) => {
+        dispatch(showLoading());
+
         try {
             const comment = await api.createThreadComment({ id, content });
 
@@ -116,11 +123,15 @@ export function asyncAddComment({ id, content }) {
         } catch (error) {
             alert(error.message);
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncUpvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -144,11 +155,15 @@ export function asyncUpvoteComment({ threadId, commentId }) {
                 dispatch(downvoteCommentActionCreator({ commentId, userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncDownvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -172,11 +187,15 @@ export function asyncDownvoteComment({ threadId, commentId }) {
                 dispatch(upvoteCommentActionCreator({ commentId, userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncNeutralizeVoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         const { authUser: { id: userId }, threadDetail } = getState();
 
         const isUpvote = threadDetail.upVotesBy.includes(userId);
@@ -197,11 +216,15 @@ export function asyncNeutralizeVoteComment({ threadId, commentId }) {
                 dispatch(downvoteCommentActionCreator({ commentId, userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncUpvoteThread() {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -225,11 +248,15 @@ export function asyncUpvoteThread() {
                 dispatch(downvoteThreadActionCreator({ userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncDownvoteThread() {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         if (getState().authUser === null) {
             alert('Please login first!');
 
@@ -253,11 +280,15 @@ export function asyncDownvoteThread() {
                 dispatch(upvoteThreadActionCreator({ userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }
 
 export function asyncNeutralizeVoteThread() {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
+
         const { authUser: { id: userId }, threadDetail } = getState();
 
         const isUpvote = threadDetail.upVotesBy.includes(userId);
@@ -278,5 +309,7 @@ export function asyncNeutralizeVoteThread() {
                 dispatch(downvoteThreadActionCreator({ userId }));
             }
         }
+
+        dispatch(hideLoading());
     };
 }

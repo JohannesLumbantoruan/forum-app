@@ -10,8 +10,8 @@ export default function LoginInput({ login }) {
         event.preventDefault();
 
         login({ email, password });
-    }
-    
+    };
+
     return (
         <form className="form-control" onSubmit={onSubmitHandler} id="login-form">
             <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} required />
