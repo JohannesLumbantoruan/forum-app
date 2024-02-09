@@ -130,13 +130,13 @@ export function asyncAddComment({ id, content }) {
 
 export function asyncUpvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -162,13 +162,13 @@ export function asyncUpvoteComment({ threadId, commentId }) {
 
 export function asyncDownvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -223,13 +223,13 @@ export function asyncNeutralizeVoteComment({ threadId, commentId }) {
 
 export function asyncUpvoteThread() {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
@@ -255,13 +255,13 @@ export function asyncUpvoteThread() {
 
 export function asyncDownvoteThread() {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { authUser: { id: userId }, threadDetail } = getState();
 

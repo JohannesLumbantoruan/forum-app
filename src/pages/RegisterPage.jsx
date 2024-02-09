@@ -10,7 +10,7 @@ export default function RegisterPage() {
     const onRegisterHandler = ({ name, email, password }) => {
         dispatch(asyncRegisterUser({ name, email, password }));
 
-        navigate('/');
+        navigate('/login');
     };
 
     return (

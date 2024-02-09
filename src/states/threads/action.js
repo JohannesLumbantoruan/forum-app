@@ -101,13 +101,13 @@ export function asyncAddThread({ title, body, category }) {
 
 export function asyncUpvoteThread(threadId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { id: userId } = getState().authUser;
 
@@ -135,13 +135,13 @@ export function asyncUpvoteThread(threadId) {
 
 export function asyncDownvoteThread(threadId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-
         if (getState().authUser === null) {
             alert('Please login first!');
 
             return;
         }
+
+        dispatch(showLoading());
 
         const { id: userId } = getState().authUser;
 
