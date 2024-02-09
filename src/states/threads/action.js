@@ -1,5 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../data/api';
+import { receiveCategoriesActionCreator } from '../categories/action';
 
 export const ActionType = {
     RECEIVE_THREADS: 'RECEIVE_THREADS',
@@ -64,7 +65,16 @@ export function asyncReceiveThreads() {
         try {
             const threads = await api.getAllThreads();
 
+            const categories = [];
+
+            for (const thread of threads) {
+                if (!categories.includes(thread.category)) {
+                    categories.push(thread.category);
+                }
+            }
+
             dispatch(receiveThreadsActionCreator(threads));
+            dispatch(receiveCategoriesActionCreator(categories));
         } catch (error) {
             alert(error.message);
         }

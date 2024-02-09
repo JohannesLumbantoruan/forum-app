@@ -32,6 +32,8 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'no-underscore-dangle': 0,
     'consistent-return': 0,
-    'import/no-extraneous-dependencies': 0
+    'import/no-extraneous-dependencies': 0,
+    'no-restricted-syntax': 0,
+    'no-case-declarations': 0
   },
 }

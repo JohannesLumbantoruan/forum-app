@@ -22,7 +22,7 @@ body {
 main {
   margin-inline: auto;
   padding-block: 20px;
-  max-width: 60%;
+  width: 60%;
 
   h2 {
     margin-bottom: 10px;
@@ -41,6 +41,12 @@ textarea {
 .avatar {
   border-radius: 50%;
   width: 1em;
+}
+
+select {
+  padding: 5px;
+  display: block;
+  margin-left: auto;
 }
 
 nav {
@@ -236,5 +242,35 @@ nav {
   img {
     width: 50px;
     border-radius: 50%;
+  }
+}
+
+/* media query */
+@media screen and (max-width: 768px) {
+  main {
+    width: 80%;
+  }
+
+  nav {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .app-container {
+    main {
+      width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  nav {
+    h1 {
+      font-size: 20px;
+    }
+
+    ul li {
+      font-size: 16px;
+    }
   }
 }
