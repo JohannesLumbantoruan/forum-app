@@ -28,7 +28,7 @@ export default function CommentFooter({ comment, threadId }) {
         <div className="comment-data">
             <div className="comment-data__upvote">
                 {
-                    comment.upVotesBy.includes(authUser.id)
+                    comment.upVotesBy.includes(authUser?.id)
                     ? <AiFillLike onClick={onNeutralizeVoteCommentHandler} />
                     : <AiOutlineLike onClick={onUpvoteCommentHandler} />
                 }
@@ -36,7 +36,7 @@ export default function CommentFooter({ comment, threadId }) {
             </div>
             <div className="comment-data__downvote">
                 {
-                    comment.downVotesBy.includes(authUser.id)
+                    comment.downVotesBy.includes(authUser?.id)
                     ? <AiFillDislike onClick={onNeutralizeVoteCommentHandler} />
                     : <AiOutlineDislike onClick={onDownvoteCommentHandler} />
                 }

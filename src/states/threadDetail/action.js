@@ -121,6 +121,12 @@ export function asyncAddComment({ id, content }) {
 
 export function asyncUpvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
         const { authUser: { id: userId }, threadDetail } = getState();
 
         const isDownvote = threadDetail.downVotesBy.includes(userId);
@@ -143,6 +149,12 @@ export function asyncUpvoteComment({ threadId, commentId }) {
 
 export function asyncDownvoteComment({ threadId, commentId }) {
     return async (dispatch, getState) => {
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
         const { authUser: { id: userId }, threadDetail } = getState();
 
         const isUpvote = threadDetail.upVotesBy.includes(userId);
@@ -190,6 +202,12 @@ export function asyncNeutralizeVoteComment({ threadId, commentId }) {
 
 export function asyncUpvoteThread() {
     return async (dispatch, getState) => {
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
         const { threadDetail: { id: threadId } } = getState();
 
         try {
@@ -206,6 +224,12 @@ export function asyncUpvoteThread() {
 
 export function asyncDownvoteThread() {
     return async (dispatch, getState) => {
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
         const { threadDetail: { id: threadId } } = getState();
 
         try {

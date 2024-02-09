@@ -82,7 +82,17 @@ export function asyncAddThread({ title, body, category }) {
 
 export function asyncUpvoteThread(threadId) {
     return async (dispatch, getState) => {
-        const { id: userId = null } = getState().authUser ?? {};
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
+        const { id: userId } = getState().authUser;
+
+        const votedThread = getState().threads.find((thread) => thread.id === threadId);
+
+        const isDownvote = votedThread.downVotesBy.includes(userId);
 
         try {
             dispatch(upvoteThreadActionCreator({ userId, threadId }));
@@ -90,13 +100,29 @@ export function asyncUpvoteThread(threadId) {
             await api.upvoteThread(threadId);
         } catch (error) {
             alert(error.message);
+
+            dispatch(neutralizeVoteActionCreator({ userId, threadId }));
+
+            if (isDownvote) {
+                dispatch(downvoteThreadActionCreator({ userId, threadId }));
+            }
         }
     };
 }
 
 export function asyncDownvoteThread(threadId) {
     return async (dispatch, getState) => {
-        const { id: userId } = getState().authUser ?? {};
+        if (getState().authUser === null) {
+            alert('Please login first!');
+
+            return;
+        }
+
+        const { id: userId } = getState().authUser;
+
+        const votedThread = getState().threads.find((thread) => thread.id === threadId);
+
+        const isUpvote = votedThread.upVotesBy.includes(userId);
 
         try {
             dispatch(downvoteThreadActionCreator({ userId, threadId }));
@@ -104,20 +130,39 @@ export function asyncDownvoteThread(threadId) {
             await api.downvoteThread(threadId);
         } catch (error) {
             alert(error.message);
+
+            dispatch(neutralizeVoteActionCreator({ userId, threadId }));
+
+            if (isUpvote) {
+                dispatch(upvoteThreadActionCreator({ userId, threadId }));
+            }
         }
     };
 }
 
 export function asyncNeutralizeVoteThread(threadId) {
     return async (dispatch, getState) => {
+        const { authUser: { id: userId } } = getState();
+
+        const votedThread = getState().threads.find((thread) => thread.id === threadId);
+
+        const isUpvote = votedThread.upVotesBy.includes(userId);
+        const isDownvote = votedThread.downVotesBy.includes(userId);
+
         try {
-            await api.neutralizeThread(threadId);
-
-            const { authUser: { id: userId } } = getState();
-
             dispatch(neutralizeVoteActionCreator({ userId, threadId }));
+
+            await api.neutralizeThread(threadId);
         } catch (error) {
             alert(error.message);
+
+            if (isUpvote) {
+                dispatch(upvoteThreadActionCreator({ userId, threadId }));
+            }
+
+            if (isDownvote) {
+                dispatch(downvoteThreadActionCreator({ userId, threadId }));
+            }
         }
     };
 }
