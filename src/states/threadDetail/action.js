@@ -302,7 +302,7 @@ export function asyncNeutralizeVoteThread() {
             alert(error.message);
 
             if (isUpvote) {
-                dispatch(upvoteCommentActionCreator({ userId }));
+                dispatch(upvoteThreadActionCreator({ userId }));
             }
 
             if (isDownvote) {

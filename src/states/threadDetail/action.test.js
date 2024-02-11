@@ -40,7 +40,7 @@ import {
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../data/api';
 import {
-    addCommentActionCreator, asyncAddComment, asyncDownvoteComment, asyncNeutralizeVoteComment, asyncReceiveThreadDetail, asyncUpvoteComment, clearThreadDetailActionCreator, downvoteCommentActionCreator, neutralizeVoteCommentActionCreator, receiveThreadDetailActionCreator, upvoteCommentActionCreator
+    addCommentActionCreator, asyncAddComment, asyncDownvoteComment, asyncDownvoteThread, asyncNeutralizeVoteComment, asyncNeutralizeVoteThread, asyncReceiveThreadDetail, asyncUpvoteComment, asyncUpvoteThread, clearThreadDetailActionCreator, downvoteCommentActionCreator, downvoteThreadActionCreator, neutralizeVoteActionCreator, neutralizeVoteCommentActionCreator, receiveThreadDetailActionCreator, upvoteCommentActionCreator, upvoteThreadActionCreator
 } from './action';
 
 const fakeErrorResponse = new Error('Internal server error');
@@ -525,5 +525,264 @@ describe('asyncNeutralizeVoteComment thunk', () => {
             commentId: 'comment-12345',
             userId: 'user-12345'
         }));
+    });
+});
+
+describe('asyncUpvoteThread thunk', () => {
+    const fakeUpvoteThreadResponse = { status: 'success' };
+
+    beforeEach(() => {
+        api._upvoteThread = api.upvoteThread;
+    });
+
+    afterEach(() => {
+        api.upvoteThread = api._upvoteThread;
+
+        delete api._upvoteThread;
+    });
+
+    it('should dispatch action correctly when data fetching success', async () => {
+        // arrange
+        // stub implementation
+        api.upvoteThread = () => Promise.resolve(fakeUpvoteThreadResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: []
+            }
+        }));
+
+        // action
+        await asyncUpvoteThread()(dispatch, getState);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(upvoteThreadActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(2);
+    });
+
+    it('should dispatch action and call alert correctly when data fetching failed', async () => {
+        // arrange
+        // stub implementation
+        api.upvoteThread = () => Promise.reject(fakeErrorResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: []
+            }
+        }));
+        // mock alert
+        window.alert = vi.fn();
+
+        // action
+        await asyncUpvoteThread()(dispatch, getState);
+
+        // expect
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(neutralizeVoteActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(2);
+        expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+
+        // arrange: thread downvote by user
+        const getState2 = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: ['user-12345']
+            }
+        }));
+
+        // action
+        await asyncUpvoteThread()(dispatch, getState2);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(downvoteThreadActionCreator({ userId: 'user-12345' }));
+    });
+});
+
+describe('asyncDownvoteThread thunk', () => {
+    const fakeDownvoteThreadResponse = { status: 'success' };
+
+    beforeEach(() => {
+        api._downVoteThread = api.downvoteThread;
+    });
+
+    afterEach(() => {
+        api.downvoteThread = api._downVoteThread;
+
+        delete api._downVoteThread;
+    });
+
+    it('should dispatch action correctly when data fetching success', async () => {
+        // arrange
+        // stub implementation
+        api.downvoteThread = () => Promise.resolve(fakeDownvoteThreadResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                upVotesBy: []
+            }
+        }));
+
+        // action
+        await asyncDownvoteThread()(dispatch, getState);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(downvoteThreadActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(2);
+    });
+
+    it('should dispatch action and call alert correctly when data fetching failed', async () => {
+        // arrange
+        // stub implementation
+        api.downvoteThread = () => Promise.reject(fakeErrorResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                upVotesBy: []
+            }
+        }));
+        // mock alert
+        window.alert = vi.fn();
+
+        // action
+        await asyncDownvoteThread()(dispatch, getState);
+
+        // expect
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(neutralizeVoteActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(2);
+        expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+
+        // arrange: thread downvote by user
+        const getState2 = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                upVotesBy: ['user-12345']
+            }
+        }));
+
+        // action
+        await asyncDownvoteThread()(dispatch, getState2);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(upvoteThreadActionCreator({ userId: 'user-12345' }));
+    });
+});
+
+describe('asyncNeutralizeVoteThread thunk', () => {
+    const fakeNeutralizeVoteThreadResponse = { status: 'success' };
+
+    beforeEach(() => {
+        api._neutralizeThread = api.neutralizeThread;
+    });
+
+    afterEach(() => {
+        api.neutralizeThread = api._neutralizeThread;
+
+        delete api._neutralizeThread;
+    });
+
+    it('should dispatch action correctly when data fetching success', async () => {
+        // arrange
+        // stub implementation
+        api.neutralizeThread = () => Promise.resolve(fakeNeutralizeVoteThreadResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: ['user-12345'],
+                upVotesBy: ['user-23456']
+            }
+        }));
+
+        // action
+        await asyncNeutralizeVoteThread()(dispatch, getState);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(neutralizeVoteActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(1);
+    });
+
+    it('should dispatch action and call alert correctly when data fetching failed', async () => {
+        // arrange: thread upvote by user
+        // stub implementation
+        api.neutralizeThread = () => Promise.reject(fakeErrorResponse);
+        // mock dispatch
+        const dispatch = vi.fn();
+        // mock getState
+        const getState = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: [],
+                upVotesBy: ['user-12345']
+            }
+        }));
+        // mock alert
+        window.alert = vi.fn();
+
+        // action
+        await asyncNeutralizeVoteThread()(dispatch, getState);
+
+        // expect
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(dispatch).toHaveBeenCalledWith(neutralizeVoteActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(upvoteThreadActionCreator({ userId: 'user-12345' }));
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(getState).toBeCalledTimes(1);
+        expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+
+        // arrange: thread downvote by user
+        const getState2 = vi.fn().mockImplementation(() => ({
+            authUser: {
+                id: 'user-12345'
+            },
+            threadDetail: {
+                downVotesBy: ['user-12345'],
+                upVotesBy: []
+            }
+        }));
+
+        // action
+        await asyncNeutralizeVoteThread()(dispatch, getState2);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(downvoteThreadActionCreator({ userId: 'user-12345' }));
     });
 });
