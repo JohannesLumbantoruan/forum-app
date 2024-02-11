@@ -25,9 +25,9 @@ const fakeAuthUserResponse = {
     email: 'johndoe@mail.com'
 };
 
-const fakeTokenResponse = {
-    token: 'afaketoken'
-};
+// const fakeTokenResponse = {
+//     token: 'afaketoken'
+// };
 
 const fakeErrorResponse = new Error('Internal server error');
 
