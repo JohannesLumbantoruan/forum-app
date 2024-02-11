@@ -47,6 +47,7 @@ select {
   padding: 5px;
   display: block;
   margin-left: auto;
+  font-size: 1rem;
 }
 
 nav {
@@ -213,6 +214,10 @@ nav {
   h3 {
     display: flex;
     gap: 5px;
+  }
+
+  .login-to-comment {
+    margin-top: 10px;
   }
 }
 
