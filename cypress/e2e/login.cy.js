@@ -11,7 +11,7 @@ describe('template spec', () => {
   });
 
   it('should display login page correctly', () => {
-    // verify visible elements in login page
+    // verify visible elements on login page
     cy.get('input[placeholder="Email"]').should('be.visible');
     cy.get('input[placeholder="Password"]').should('be.visible');
     cy.get('button').contains(/^Login$/).should('be.visible');
