@@ -4,6 +4,9 @@
  * - asyncSetAuthUser thunk
  *  - should dispatch action correctly when data fetching sucess
  *  - should dispatch action and call alert correctly when data fetching failed
+ *
+ * - asyncUnsetAuthUser thunk
+ *  - should dispatch action correctly
  */
 
 import {
@@ -11,7 +14,9 @@ import {
 } from 'vitest';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../data/api';
-import { asyncSetAuthUser, setAuthUserActionCreator } from './action';
+import {
+    asyncSetAuthUser, asyncUnsetAuthUser, setAuthUserActionCreator, unsetAuthUserActionCreator
+} from './action';
 
 const fakeAuthUserResponse = {
     id: 'johndoe',
@@ -80,5 +85,19 @@ describe('asyncSetAuthUser thunk', () => {
         expect(dispatch).toHaveBeenCalledWith(showLoading());
         expect(dispatch).toHaveBeenCalledWith(hideLoading());
         expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+    });
+});
+
+describe('asyncUnsetAuthUser thunk', () => {
+    it('should dispatch action correctly', () => {
+        // arrange
+        // mock dispatch
+        const dispatch = vi.fn();
+
+        // action
+        asyncUnsetAuthUser()(dispatch);
+
+        // assert
+        expect(dispatch).toHaveBeenCalledWith(unsetAuthUserActionCreator());
     });
 });
