@@ -9,8 +9,8 @@ export const ActionType = {
     DOWNVOTE_COMMENT: 'DOWNVOTE_COMMENT',
     NEUTRALIZE_VOTE_COMMENT: 'NEUTRALIZE_VOTE_COMMENT',
     UPVOTE_DETAIL_THREAD: 'UPVOTE_DETAIL_THREAD',
-    DOWNVOTE_THREAD: 'DOWNVOTE_THREAD',
-    NEUTRALIZE_VOTE_THREAD: 'NEUTRALIZE_VOTE_THREAD'
+    DOWNVOTE_DETAIL_THREAD: 'DOWNVOTE_DETAIL_THREAD',
+    NEUTRALIZE_VOTE_DETAIL_THREAD: 'NEUTRALIZE_VOTE_DETAIL_THREAD'
 };
 
 export function receiveThreadDetailActionCreator(threadDetail) {
@@ -78,7 +78,7 @@ export function upvoteThreadActionCreator({ userId }) {
 
 export function downvoteThreadActionCreator({ userId }) {
     return {
-        type: ActionType.DOWNVOTE_THREAD,
+        type: ActionType.DOWNVOTE_DETAIL_THREAD,
         payload: {
             userId
         }
@@ -87,7 +87,7 @@ export function downvoteThreadActionCreator({ userId }) {
 
 export function neutralizeVoteActionCreator({ userId }) {
     return {
-        type: ActionType.NEUTRALIZE_VOTE_THREAD,
+        type: ActionType.NEUTRALIZE_VOTE_DETAIL_THREAD,
         payload: {
             userId
         }
