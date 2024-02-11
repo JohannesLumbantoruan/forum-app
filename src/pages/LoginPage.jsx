@@ -12,6 +12,7 @@ export default function LoginPage() {
 
         navigate('/');
     };
+
     return (
         <div className="form-page">
             <h1>Login Page</h1>
