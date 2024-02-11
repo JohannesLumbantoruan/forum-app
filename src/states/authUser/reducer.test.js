@@ -31,6 +31,8 @@ describe('authUserReducer function', () => {
         const authUser = {
             id: 'johndoe',
             name: 'John Doe',
+            avatar: 'https://avatar.com/johndoe',
+            email: 'johndoe@mail.com'
         };
 
         const action = {
