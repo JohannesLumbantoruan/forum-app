@@ -11,8 +11,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import {
-    afterEach,
-    beforeEach, describe, expect, it, vi
+    afterEach, describe, expect, it, vi
 } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
