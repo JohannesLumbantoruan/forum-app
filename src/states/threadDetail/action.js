@@ -140,7 +140,7 @@ export function asyncUpvoteComment({ threadId, commentId }) {
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
-        const isDownvote = threadDetail.downVotesBy.includes(userId);
+        const isDownvote = threadDetail.comments.find((comment) => comment.id === commentId)?.downVotesBy.includes(userId);
 
         dispatch(upvoteCommentActionCreator({ commentId, userId }));
 
@@ -172,7 +172,7 @@ export function asyncDownvoteComment({ threadId, commentId }) {
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
-        const isUpvote = threadDetail.upVotesBy.includes(userId);
+        const isUpvote = threadDetail.comments.find((comment) => comment.id === commentId)?.upVotesBy.includes(userId);
 
         dispatch(downvoteCommentActionCreator({ commentId, userId }));
 
@@ -198,8 +198,8 @@ export function asyncNeutralizeVoteComment({ threadId, commentId }) {
 
         const { authUser: { id: userId }, threadDetail } = getState();
 
-        const isUpvote = threadDetail.upVotesBy.includes(userId);
-        const isDownvote = threadDetail.downVotesBy.includes(userId);
+        const isUpvote = threadDetail.comments.find((comment) => comment.id === commentId)?.upVotesBy.includes(userId);
+        const isDownvote = threadDetail.comments.find((comment) => comment.id === commentId)?.downVotesBy.includes(userId);
 
         dispatch(neutralizeVoteCommentActionCreator({ commentId, userId }));
 
