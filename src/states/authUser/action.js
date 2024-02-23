@@ -21,7 +21,7 @@ export function unsetAuthUserActionCreator() {
     };
 }
 
-export function asyncSetAuthUser({ email, password }) {
+export function asyncSetAuthUser({ email, password, navigate }) {
     return async (dispatch) => {
         dispatch(showLoading());
 
@@ -33,6 +33,8 @@ export function asyncSetAuthUser({ email, password }) {
             const authUser = await api.getOwnProfile();
 
             dispatch(setAuthUserActionCreator(authUser));
+
+            navigate('/');
         } catch (error) {
             alert(error.message);
         }

@@ -30,12 +30,16 @@ export function asyncReceiveUsers() {
     };
 }
 
-export function asyncRegisterUser({ name, email, password }) {
+export function asyncRegisterUser({
+    name, email, password, navigate
+}) {
     return async (dispatch) => {
         dispatch(showLoading());
 
         try {
             await api.register({ name, email, password });
+
+            navigate('/login');
         } catch (error) {
             alert(error.message);
         }
