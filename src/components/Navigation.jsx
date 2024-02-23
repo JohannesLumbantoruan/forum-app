@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiLogOut, FiLogIn } from 'react-icons/fi';
 import { BiConversation } from 'react-icons/bi';
 import { MdOutlineLeaderboard } from 'react-icons/md';
@@ -10,9 +10,12 @@ export default function Navigation() {
     const authUser = useSelector((states) => states.authUser);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onLogoutHandler = () => {
         dispatch(asyncUnsetAuthUser());
+
+        navigate('/login');
     };
 
     return (
